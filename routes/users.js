@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const nodemailer = require('nodemailer');
+const WAValidator = require('wallet-address-validator');
 // Load User model
 const User = require('../models/User');
 const { forwardAuthenticated } = require('../config/auth');
@@ -22,6 +23,9 @@ router.post('/register', (req, res) => {
     errors.push({ msg: 'Please enter all fields' });
   }
 
+  var valid = WAValidator.validate( wallet, 'BTC');
+  if(!valid)
+  errors.push( {msg: 'Invalid Wallet Address' });
   if (password != password2) {
     errors.push({ msg: 'Passwords do not match' });
   }
