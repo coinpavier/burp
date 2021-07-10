@@ -87,7 +87,7 @@ router.post('/register', (req, res) => {
      
                 let transporter = nodemailer.createTransport({
                   host: 'mail.privateemail.com',
-                  port: 465,
+                  port: 587,
                   secure: true, // true for 465, false for other ports
                   auth: {
                       user: 'mail@coinanalytica.com', // generated ethereal user
